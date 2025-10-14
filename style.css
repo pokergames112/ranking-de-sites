@@ -1,0 +1,1087 @@
+/* style.css - Foco em Azul, Verde e Branco */
+
+/* Reset Básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Scroll Suave para o botão de topo */
+html {
+    scroll-behavior: smooth;
+}
+
+/* --- ESTRUTURA GLOBAL E NAVBAR INTELIGENTE --- */
+
+.section-container {
+    padding-top: 65px; /* Adiciona padding para compensar a navbar fixa */
+}
+
+.navbar-header {
+    background-color: #1A374D; 
+    width: 100%;
+    padding: 8px 0; 
+    border-bottom: 3px solid #63C132; 
+    
+    /* REGRAS PARA NAVBAR FIXA E INTELIGENTE */
+    position: fixed; 
+    top: 0;
+    z-index: 999; 
+    transition: top 0.3s; /* Transição suave */
+}
+
+.navbar-header.hidden {
+    top: -65px; /* Esconde a navbar */
+}
+
+.navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-logo img {
+    height: 30px; 
+    vertical-align: middle;
+}
+
+.nav-links {
+    display: flex;
+    font-size: 16px;
+}
+
+.nav-links > li {
+    position: relative;
+    margin-left: 25px;
+}
+
+.nav-links a {
+    color: #E8F0FE; 
+    padding: 5px 5px;
+    display: block;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #63C132;
+}
+
+.has-submenu > a::after {
+    content: ' \25BC'; 
+    font-size: 10px;
+    margin-left: 5px;
+}
+
+/* Estilo Básico dos Submenus */
+.submenu-level-1,
+.submenu-level-2 {
+    display: none; 
+    position: absolute;
+    background-color: #244C6A; 
+    min-width: 220px;
+    z-index: 10;
+    border: 1px solid #102B40; 
+    padding: 5px 0;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.3);
+}
+
+.submenu-level-1 {
+    top: 100%; 
+    left: 0;
+}
+
+.submenu-level-2 {
+    top: 0; 
+    left: 100%; 
+}
+
+.submenu-level-1 a,
+.submenu-level-2 a {
+    padding: 10px 20px;
+    white-space: nowrap; 
+    color: #E8F0FE;
+}
+
+.submenu-level-1 a:hover,
+.submenu-level-2 a:hover {
+    background-color: #386A91; 
+    color: #63C132; 
+}
+
+.has-submenu:hover > .submenu-level-1 {
+    display: block; 
+}
+
+.has-submenu-level-2 {
+    position: relative; 
+}
+
+.has-submenu-level-2:hover > .submenu-level-2 {
+    display: block; 
+}
+
+.has-submenu-level-2 > a::after {
+    content: ' \25B6'; 
+    font-size: 10px;
+    float: right;
+    margin-left: 10px;
+}
+
+/* Botão Mobile (Invisível no Desktop) */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #E8F0FE;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+/* --- ESTILO PARA SECTION 1 (HERO) --- */
+
+.section-1-bg {
+    background-color: #1A374D;
+    padding: 100px 20px;
+    color: #E8F0FE;
+}
+
+.section-1-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 50px;
+    align-items: flex-start;
+}
+
+.section-1-text {
+    flex: 2;
+}
+
+.header-data {
+    font-size: 0.85em;
+    color: #8c9cb1; 
+    display: block;
+    margin-bottom: 5px;
+}
+
+.section-1-text h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.section-1-text p {
+    line-height: 1.6;
+    margin-bottom: 30px;
+    font-size: 1.05em;
+}
+
+.btn-veja-mais {
+    background-color: #63C132;
+    color: #1A374D;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s;
+}
+
+.btn-veja-mais:hover {
+    background-color: #70d641;
+}
+
+.section-1-sidebar {
+    flex: 1;
+    background-color: #102B40;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #244C6A;
+}
+
+.sidebar-item:last-of-type {
+    border-bottom: none;
+    margin-bottom: 10px;
+}
+
+.sidebar-item .icon {
+    font-size: 1.2em;
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+.sidebar-item .label {
+    flex-grow: 1;
+    font-size: 0.9em;
+    color: #8c9cb1;
+}
+
+.sidebar-item .value {
+    font-weight: bold;
+    color: #63C132;
+    transition: color 0.3s;
+}
+
+.sidebar-item .value:hover {
+    color: #FFC300;
+}
+
+.sidebar-disclaimer {
+    font-size: 0.75em;
+    text-align: right;
+    margin-top: 10px;
+    color: #8c9cb1;
+}
+
+/* --- ESTILO PARA SECTION 2 (TABELA) --- */
+
+.section-2-bg {
+    background-color: #f4f7fa;
+}
+
+.section-2-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.section-2-title {
+    font-size: 2em;
+    color: #1A374D;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.table-wrapper {
+    overflow-x: auto; 
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; 
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+thead {
+    background-color: #63C132;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+
+thead th {
+    padding: 15px 10px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.header-casas {
+    display: none;
+}
+
+.table-row {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.table-row:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.table-row:hover {
+    background-color: #f0f0f0;
+}
+
+td {
+    padding: 15px 10px;
+    vertical-align: middle;
+}
+
+.table-rank {
+    width: 20px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #1A374D;
+    text-align: center;
+}
+
+.table-logo {
+    width: 100px; 
+    padding-left: 0;
+}
+
+.table-logo img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.table-disclaimer-info {
+    font-size: 0.65em;
+    color: #666;
+    margin-top: 5px;
+    line-height: 1.2;
+}
+
+.table-rating {
+    width: 100px;
+    text-align: center;
+}
+
+.rating-score {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #63C132; 
+}
+
+.rating-stars {
+    color: #FFC300; 
+    font-size: 1.2em;
+    letter-spacing: 2px;
+}
+
+.table-details {
+    color: #333;
+}
+
+.table-details ul {
+    margin-bottom: 5px;
+}
+
+.table-details li {
+    font-size: 0.9em;
+    padding: 3px 0;
+}
+
+.table-details li span {
+    color: #63C132;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.analysis-link {
+    color: #666;
+    font-size: 0.85em;
+    text-decoration: underline;
+    display: block;
+    margin-top: 5px;
+    transition: color 0.3s;
+}
+
+.analysis-link:hover {
+    color: #1A374D;
+}
+
+.table-action {
+    width: 120px;
+    text-align: center;
+}
+
+.btn-visitar {
+    display: inline-block;
+    background-color: #FF4165;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    transition: background-color 0.3s;
+}
+
+.btn-visitar:hover {
+    background-color: #e03253;
+}
+
+.final-disclaimer {
+    font-size: 0.75em;
+    text-align: right;
+    margin-top: 10px;
+    color: #8c9cb1;
+}
+
+/* --- ESTILO PARA SECTION 3 (CARROSSEL) --- */
+
+.section-3-bg {
+    background-color: #1A374D; 
+    color: #E8F0FE;
+}
+
+.section-3-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 50px 20px;
+}
+
+.section-3-title {
+    font-size: 2em;
+    color: #E8F0FE;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.carousel-container {
+    position: relative;
+    overflow: hidden; 
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out; 
+    /* Largura será ajustada pelo JS, 100% * número de slides */
+}
+
+.carousel-slide {
+    flex-shrink: 0; 
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    max-height: 400px;
+}
+
+.slide-content {
+    background-color: #f4f7fa; 
+    color: #333;
+    padding: 20px 30px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.slide-tag {
+    display: inline-block;
+    background-color: #FFC300; 
+    color: #333;
+    font-size: 0.8em;
+    font-weight: bold;
+    padding: 3px 8px;
+    margin-bottom: 10px;
+}
+
+.slide-content h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #1A374D;
+}
+
+.slide-content p {
+    font-size: 0.95em;
+    margin-bottom: 5px;
+    color: #666;
+}
+
+.slide-excerpt {
+    margin-top: 10px;
+    line-height: 1.4;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    z-index: 10;
+    font-size: 1.5em;
+    transition: background 0.3s;
+}
+
+.carousel-button:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+.carousel-indicators {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+.indicator {
+    width: 10px;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.indicator.active {
+    background-color: #63C132; 
+}
+
+/* --- ESTILO PARA SECTION 4 (TEXTO) --- */
+
+.section-4-bg {
+    background-color: #f4f7fa; 
+    padding: 60px 20px;
+}
+
+.section-4-content {
+    max-width: 900px; 
+    margin: 0 auto;
+    color: #333;
+}
+
+.section-4-subtitle {
+    font-size: 1.8em;
+    color: #1A374D; 
+    text-align: center;
+    margin: 40px 0 20px 0;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #63C132;
+    display: inline-block;
+}
+
+.content-block {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.content-block p {
+    text-align: left;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    font-size: 1em;
+}
+
+.check-list {
+    text-align: left;
+    list-style: none;
+    padding-left: 0;
+    margin: 20px 0;
+    display: inline-block; 
+    max-width: 100%;
+}
+
+.check-list li {
+    font-size: 1em;
+    padding: 5px 0;
+}
+
+.check-list li span {
+    color: #63C132; 
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+.final-question {
+    font-style: italic;
+    margin-top: 30px;
+    color: #666;
+}
+
+/* ESTILO PARA O DESTAQUE DE CASA DE APOSTAS */
+
+.highlight-promo-card {
+    background-color: #ffffff; 
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 40px 0;
+    
+    display: flex;
+    align-items: center;
+    text-align: left;
+    gap: 20px;
+}
+
+.highlight-promo-card .card-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 150px;
+    flex-shrink: 0;
+}
+
+.highlight-promo-card .card-left img {
+    max-width: 120px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.highlight-promo-card .rating-box {
+    text-align: center;
+}
+
+.highlight-promo-card .rating-score {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #63C132;
+    display: block;
+}
+
+.highlight-promo-card .rating-stars {
+    color: #FFC300;
+    font-size: 1.2em;
+    letter-spacing: 1px;
+    margin-top: -5px;
+}
+
+.highlight-promo-card .card-disclaimer-info {
+    font-size: 0.65em;
+    color: #666;
+    margin-top: 5px;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.highlight-promo-card .card-center {
+    flex-grow: 1;
+    border-left: 1px solid #e0e0e0;
+    padding-left: 20px;
+}
+
+.highlight-promo-card .card-center li {
+    font-size: 0.9em;
+    padding: 4px 0;
+    color: #333;
+}
+
+.highlight-promo-card .card-center li span {
+    color: #63C132;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.highlight-promo-card .card-right {
+    width: 150px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.highlight-promo-card .btn-visitar {
+    background-color: #FF4165; 
+    color: white;
+    padding: 10px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1em;
+    transition: background-color 0.3s;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.highlight-promo-card .btn-visitar:hover {
+    background-color: #e03253;
+}
+
+.highlight-promo-card .promo-disclaimer {
+    font-size: 0.7em;
+    color: #8c9cb1;
+    margin: 0;
+}
+
+/* --- ESTILO PARA SECTION 5 (FAQ) --- */
+
+.section-5-bg {
+    background-color: #162C40; 
+    color: #E8F0FE;
+    padding: 60px 20px;
+}
+
+.section-5-content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.section-5-title {
+    font-size: 2.5em;
+    color: #E8F0FE;
+    text-align: center;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+}
+
+.faq-grid {
+    display: flex;
+    gap: 30px;
+}
+
+.faq-column {
+    flex: 1;
+}
+
+.faq-item {
+    margin-bottom: 15px;
+}
+
+.faq-question {
+    width: 100%;
+    background-color: #1A374D; 
+    color: #E8F0FE;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    text-align: left;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.faq-question:hover {
+    background-color: #244C6A; 
+}
+
+.faq-icon {
+    font-size: 1.5em;
+    margin-left: 10px;
+    transition: transform 0.3s;
+}
+
+.faq-item.active .faq-icon {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    max-height: 0; 
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+    background-color: #244C6A; 
+    color: #c0c7d4;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.faq-answer p {
+    padding: 15px 20px;
+    line-height: 1.5;
+}
+
+
+/* --- ESTILO PARA O FOOTER (RODAPÉ) --- */
+
+.main-footer {
+    background-color: #162C40; 
+    color: #E8F0FE;
+    padding: 30px 20px 0; 
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 40px;
+}
+
+.footer-column {
+    padding: 0 15px;
+}
+
+.footer-links {
+    flex-basis: 20%; 
+    font-size: 1.1em;
+}
+
+.footer-link-list {
+    margin-bottom: 20px;
+}
+
+.footer-link-list li {
+    padding: 5px 0;
+}
+
+.footer-link-list li a::before {
+    content: '→ ';
+    color: #63C132; 
+    font-weight: bold;
+}
+
+.footer-link-list a:hover {
+    color: #63C132;
+    text-decoration: underline;
+}
+
+.footer-about {
+    flex-basis: 50%; 
+}
+
+.footer-title {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: #E8F0FE;
+}
+
+.footer-about p {
+    line-height: 1.5;
+    margin-bottom: 15px;
+    color: #c0c7d4;
+    font-size: 0.95em;
+}
+
+.footer-disclaimer-text a {
+    color: #63C132;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.footer-branding {
+    flex-basis: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+}
+
+.footer-logo {
+    max-width: 150px;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.safety-seals .seal {
+    max-width: 40px;
+    height: auto;
+    margin-left: 10px;
+}
+
+.footer-bottom {
+    width: 100%;
+    border-top: 1px solid rgba(232, 240, 254, 0.1); 
+    padding: 15px 20px;
+    text-align: center;
+}
+
+.copyright {
+    font-size: 0.8em;
+    color: #c0c7d4;
+}
+
+/* --- ESTILO DO BOTÃO VOLTAR AO TOPO --- */
+.back-to-top-btn {
+    display: none; 
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #63C132; 
+    border-radius: 50%; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    line-height: 50px; 
+    z-index: 1000; 
+    cursor: pointer;
+    transition: background-color 0.3s, opacity 0.3s;
+}
+
+.back-to-top-btn:hover {
+    background-color: #50a52b; 
+}
+
+.back-to-top-btn .arrow-up {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 12px solid #E8F0FE; 
+    vertical-align: middle;
+    margin-top: -5px; 
+}
+
+/* --- MEDIA QUERIES (RESPONSIVIDADE) --- */
+
+@media (max-width: 1024px) {
+    .section-1-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .section-1-text,
+    .section-1-sidebar {
+        flex: auto;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    
+    /* Navbar Mobile */
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px; /* Altura da navbar */
+        left: 0;
+        width: 100%;
+        background-color: #1A374D;
+        border-top: 1px solid #63C132;
+        padding-bottom: 10px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .navbar-container.open .nav-links {
+        display: flex;
+    }
+
+    .nav-links > li {
+        margin: 0;
+        border-bottom: 1px solid #244C6A;
+        padding: 5px 20px;
+    }
+    
+    .has-submenu > a::after {
+        float: right;
+    }
+
+    .submenu-level-1,
+    .submenu-level-2 {
+        position: static; /* Submenus se expandem verticalmente */
+        width: 100%;
+        box-shadow: none;
+        border: none;
+        padding-left: 20px;
+        background-color: #2f5677;
+    }
+
+    .has-submenu:hover > .submenu-level-1,
+    .has-submenu-level-2:hover > .submenu-level-2 {
+        display: none; /* Desabilita hover no mobile, JS é necessário */
+    }
+    
+    .menu-toggle {
+        display: block;
+    }
+    
+    /* Section 2 (Tabela) */
+    .table-wrapper {
+        overflow-x: scroll;
+    }
+
+    table {
+        min-width: 750px;
+    }
+    
+    .table-rank {
+        display: none;
+    }
+
+    .header-casas {
+        display: table-cell;
+    }
+
+    /* Section 3 (Carrossel) */
+    .carousel-slide img {
+        max-height: 200px;
+    }
+
+    .slide-content h3 {
+        font-size: 1.2em;
+    }
+
+    /* Section 4 (Destaque) */
+    .highlight-promo-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .highlight-promo-card .card-left {
+        width: 100%;
+    }
+    
+    .highlight-promo-card .card-center {
+        border-left: none;
+        border-top: 1px solid #e0e0e0;
+        padding: 15px 0;
+        width: 100%;
+    }
+
+    .highlight-promo-card .card-right {
+        width: 100%;
+    }
+
+    /* Section 5 (FAQ) */
+    .faq-grid {
+        flex-direction: column; 
+        gap: 0;
+    }
+
+    /* Footer */
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-column {
+        width: 100%;
+        padding: 20px 0;
+        border-bottom: 1px solid rgba(232, 240, 254, 0.1);
+    }
+    
+    .footer-branding {
+        align-items: center;
+        text-align: center;
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+}
