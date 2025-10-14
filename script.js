@@ -26,61 +26,54 @@ document.addEventListener('DOMContentLoaded', () => {
                     const targetMenu = parentLi.querySelector('.submenu-level-1') || parentLi.querySelector('.submenu-level-2');
                     
                     if (targetMenu) {
-                        // Fecha todos os outros submenus abertos no mesmo nível
-                        parentLi.parentElement.querySelectorAll('li.open').forEach(openLi => {
-                            if (openLi !== parentLi) {
-                                openLi.classList.remove('open');
-                                const openMenu = openLi.querySelector('.submenu-level-1') || openLi.querySelector('.submenu-level-2');
-                                if (openMenu) openMenu.style.display = 'none';
-                            }
-                        });
-
-                        // Alterna o submenu clicado
-                        parentLi.classList.toggle('open');
-                        targetMenu.style.display = parentLi.classList.contains('open') ? 'flex' : 'none';
+                        parentLi.classList.toggle('expanded');
                     }
                 }
             });
         });
     }
 
+
     // ----------------------------------------------------------------
     // 2. FUNCIONALIDADE DO CARROSSEL AUTOMÁTICO (SECTION 3)
     // ----------------------------------------------------------------
     const setupCarousel = () => {
-        const track = document.querySelector('.carousel-track');
-        const slides = Array.from(document.querySelectorAll('.carousel-slide'));
-        const nextButton = document.querySelector('.carousel-button.next');
-        const prevButton = document.querySelector('.carousel-button.prev');
-        const indicatorsContainer = document.querySelector('.carousel-indicators');
-        
-        if (!track || slides.length === 0) return;
-        
-        let currentSlide = 0;
-        const totalSlides = slides.length;
-        let autoSlideInterval;
-        
-        // Ajusta a largura total do track para acomodar todos os slides
-        track.style.width = `${totalSlides * 100}%`;
+        const carousel = document.querySelector('.carousel-container'); // O seu HTML usa .carousel-container como pai
+        // ALTERAÇÃO: Use .carousel-container como base, pois ele contém os botões e indicadores.
+        if (!carousel) return;
 
-        // 1. Cria os indicadores (bolinhas)
-        slides.forEach((_, index) => {
+        const track = carousel.querySelector('.carousel-track');
+        const slides = Array.from(carousel.querySelectorAll('.carousel-slide'));
+        const indicatorsContainer = carousel.querySelector('.carousel-indicators');
+        const totalSlides = slides.length;
+        let currentSlide = 0;
+        let carouselInterval;
+        const autoSlideDelay = 5000; // 5 segundos
+
+        // 1. Configuração inicial (REMOVIDA A LÓGICA DE LARGURA CONFLITANTE)
+        
+        // As linhas abaixo foram removidas pois causavam o conflito:
+        // track.style.width = `${totalSlides * 100}%`;
+        // slides.forEach(slide => { slide.style.width = `${100 / totalSlides}%`; });
+        // O CSS agora garante que cada slide tenha width: 100% e o track use display: flex.
+
+        // Cria os indicadores (MANTIDO)
+        for (let i = 0; i < totalSlides; i++) {
             const indicator = document.createElement('div');
             indicator.classList.add('indicator');
-            if (index === 0) {
+            if (i === 0) {
                 indicator.classList.add('active');
             }
             indicator.addEventListener('click', () => {
-                moveToSlide(index);
-                stopAutoSlide();
-                startAutoSlide();
+                moveToSlide(i);
+                resetAutoSlide();
             });
             indicatorsContainer.appendChild(indicator);
-        });
-        
-        const indicators = Array.from(document.querySelectorAll('.indicator'));
+        }
+        const indicators = Array.from(indicatorsContainer.querySelectorAll('.indicator'));
 
-        // 2. Função para mover para um slide específico
+
+        // 2. Função para mover para um slide específico (MANTIDO E CORRETO)
         const moveToSlide = (targetIndex) => {
             if (targetIndex < 0) {
                 targetIndex = totalSlides - 1;
@@ -88,7 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 targetIndex = 0;
             }
 
-            const amountToMove = targetIndex * 100 / totalSlides;
+            // A movimentação é de 100% do container para cada slide
+            const amountToMove = targetIndex * 100;
             track.style.transform = 'translateX(-' + amountToMove + '%)';
             currentSlide = targetIndex;
             
@@ -97,88 +91,97 @@ document.addEventListener('DOMContentLoaded', () => {
             indicators[currentSlide].classList.add('active');
         }
 
-        // 3. Navegação manual
-        if (nextButton) nextButton.addEventListener('click', () => {
-            moveToSlide(currentSlide + 1);
-            stopAutoSlide();
-            startAutoSlide();
-        });
+        // 3. Navegação manual (SELETORES CORRIGIDOS)
+        const prevButton = carousel.querySelector('.carousel-button.prev'); // CORRIGIDO: usa '.carousel-button.prev'
+        const nextButton = carousel.querySelector('.carousel-button.next'); // CORRIGIDO: usa '.carousel-button.next'
 
-        if (prevButton) prevButton.addEventListener('click', () => {
-            moveToSlide(currentSlide - 1);
-            stopAutoSlide();
-            startAutoSlide();
-        });
+        if (prevButton) {
+            prevButton.addEventListener('click', () => {
+                moveToSlide(currentSlide - 1);
+                resetAutoSlide();
+            });
+        }
 
-        // 4. Funcionalidade de Auto-Slide
-        const startAutoSlide = () => {
-            stopAutoSlide(); // Evita duplicação
-            autoSlideInterval = setInterval(() => {
+        if (nextButton) {
+            nextButton.addEventListener('click', () => {
                 moveToSlide(currentSlide + 1);
-            }, 5000); 
-        };
-        
-        const stopAutoSlide = () => {
-            clearInterval(autoSlideInterval);
-        };
+                resetAutoSlide();
+            });
+        }
 
-        // Inicia o carrossel automático
+
+        // 4. Funcionalidade de Auto-slide (MANTIDO E CORRETO)
+        const startAutoSlide = () => {
+            carouselInterval = setInterval(() => {
+                moveToSlide(currentSlide + 1);
+            }, autoSlideDelay);
+        }
+
+        const stopAutoSlide = () => {
+            clearInterval(carouselInterval);
+        }
+
+        const resetAutoSlide = () => {
+            stopAutoSlide();
+            startAutoSlide();
+        }
+        
+        // Inicia o carrossel
         startAutoSlide();
-    }
-    
+
+        // Pausa ao passar o mouse e reinicia ao remover
+        carousel.addEventListener('mouseenter', stopAutoSlide);
+        carousel.addEventListener('mouseleave', startAutoSlide);
+    };
+
+
     // ----------------------------------------------------------------
-    // 3. NAVBAR INTELIGENTE (HIDE ON SCROLL)
+    // 3. NAVBAR INTELIGENTE (ESCONDE/MOSTRA AO SCROLL)
     // ----------------------------------------------------------------
     const setupSmartNavbar = () => {
-        const navbarHeader = document.querySelector('.navbar-header');
-        if (!navbarHeader) return;
-        
         let lastScrollTop = 0;
-        const scrollThreshold = 5; 
-        const navbarHeight = navbarHeader.offsetHeight;
+        const navbar = document.querySelector('.navbar-header');
+        if (!navbar) return;
 
         window.addEventListener('scroll', () => {
             const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-
-            if (currentScroll > lastScrollTop && currentScroll > navbarHeight) {
-                // ROLANDO PARA BAIXO
-                if (currentScroll - lastScrollTop > scrollThreshold) {
-                     navbarHeader.classList.add('hidden');
-                }
-            } else {
-                // ROLANDO PARA CIMA
-                if (lastScrollTop - currentScroll > scrollThreshold || currentScroll < navbarHeight) {
-                    navbarHeader.classList.remove('hidden');
-                }
-            }
             
-            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-        });
+            if (currentScroll > lastScrollTop && currentScroll > 60) {
+                // Scroll down: Esconde a navbar
+                navbar.classList.add('hidden');
+            } else if (currentScroll < lastScrollTop) {
+                // Scroll up: Mostra a navbar
+                navbar.classList.remove('hidden');
+            }
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; 
+        }, false);
     };
 
+
     // ----------------------------------------------------------------
-    // 4. BOTÃO VOLTAR AO TOPO (BACK-TO-TOP)
+    // 4. BOTÃO VOLTAR AO TOPO
     // ----------------------------------------------------------------
     const setupBackToTop = () => {
         const backToTopBtn = document.getElementById('backToTopBtn');
         if (!backToTopBtn) return;
-        
+
+        // Mostra/Esconde o botão com base na posição de rolagem
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 200) { 
-                backToTopBtn.style.display = 'block';
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                backToTopBtn.style.display = "block";
             } else {
-                backToTopBtn.style.display = 'none';
+                backToTopBtn.style.display = "none";
             }
         });
 
+        // Comportamento de clique para rolar para o topo
         backToTopBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+            // A rolagem suave está definida no CSS 'html { scroll-behavior: smooth; }'
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     };
+
 
     // ----------------------------------------------------------------
     // 5. ACORDEÃO DO FAQ (SECTION 5)
