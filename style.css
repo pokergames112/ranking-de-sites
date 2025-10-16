@@ -9,7 +9,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f7fa;
+    background-color: #0c3166;
 }
 
 a {
@@ -35,10 +35,10 @@ html {
 }
 
 .navbar-header {
-    background-color: #1A374D; 
+    background-color: #ffffff; 
     width: 100%;
     padding: 8px 0; 
-    border-bottom: 3px solid #63C132; 
+    border-bottom: 3px solid #73ca31; 
     
     /* REGRAS PARA NAVBAR FIXA E INTELIGENTE */
     position: fixed; 
@@ -76,14 +76,14 @@ html {
 }
 
 .nav-links a {
-    color: #E8F0FE; 
+    color: #0c3166; 
     padding: 5px 5px;
     display: block;
     transition: color 0.3s;
 }
 
 .nav-links a:hover {
-    color: #63C132;
+    color: #73ca31;
 }
 
 .has-submenu > a::after {
@@ -97,10 +97,10 @@ html {
 .submenu-level-2 {
     display: none; 
     position: absolute;
-    background-color: #244C6A; 
+    background-color: #0b3167; 
     min-width: 220px;
     z-index: 10;
-    border: 1px solid #102B40; 
+    border: 1px solid #0b3167; 
     padding: 5px 0;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.3);
 }
@@ -119,13 +119,13 @@ html {
 .submenu-level-2 a {
     padding: 10px 20px;
     white-space: nowrap; 
-    color: #E8F0FE;
+    color: #0b3167;
 }
 
 .submenu-level-1 a:hover,
 .submenu-level-2 a:hover {
-    background-color: #386A91; 
-    color: #63C132; 
+    background-color: #0b3167; 
+    color: #73ca31; 
 }
 
 .has-submenu:hover > .submenu-level-1 {
@@ -160,7 +160,7 @@ html {
     display: block;
     width: 25px;
     height: 3px;
-    background-color: #E8F0FE;
+    background-color: #0b3167;
     margin: 5px 0;
     transition: all 0.3s ease;
 }
@@ -168,7 +168,7 @@ html {
 /* --- ESTILO PARA SECTION 1 (HERO) --- */
 
 .section-1-bg {
-    background-color: #1A374D;
+    background-color: #0b3167;
     padding: 100px 20px;
     color: #E8F0FE;
 }
@@ -204,8 +204,8 @@ html {
 }
 
 .btn-veja-mais {
-    background-color: #63C132;
-    color: #1A374D;
+    background-color: #73ca31;
+    color: #0b3167;
     padding: 10px 20px;
     border-radius: 5px;
     font-weight: bold;
@@ -214,12 +214,12 @@ html {
 }
 
 .btn-veja-mais:hover {
-    background-color: #70d641;
+    background-color: #73ca31;
 }
 
 .section-1-sidebar {
     flex: 1;
-    background-color: #102B40;
+    background-color: #0b3167;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -229,7 +229,7 @@ html {
     display: flex;
     align-items: center;
     padding: 8px 0;
-    border-bottom: 1px solid #244C6A;
+    border-bottom: 1px solid #0b3167;
 }
 
 .sidebar-item:last-of-type {
@@ -252,7 +252,7 @@ html {
 
 .sidebar-item .value {
     font-weight: bold;
-    color: #63C132;
+    color: #73ca31;
     transition: color 0.3s;
 }
 
@@ -281,7 +281,7 @@ html {
 
 .section-2-title {
     font-size: 2em;
-    color: #1A374D;
+    color: #0b3167;
     text-align: center;
     margin-bottom: 30px;
 }
@@ -300,7 +300,7 @@ table {
 }
 
 thead {
-    background-color: #63C132;
+    background-color: #73ca31;
     color: white;
     font-weight: bold;
     text-transform: uppercase;
@@ -338,7 +338,7 @@ td {
     width: 20px;
     font-size: 1.5em;
     font-weight: bold;
-    color: #1A374D;
+    color: #0b3167;
     text-align: center;
 }
 
@@ -368,7 +368,7 @@ td {
 .rating-score {
     font-size: 1.2em;
     font-weight: bold;
-    color: #63C132; 
+    color: #73ca31; 
 }
 
 .rating-stars {
@@ -391,7 +391,7 @@ td {
 }
 
 .table-details li span {
-    color: #63C132;
+    color: #73ca31;
     font-weight: bold;
     margin-right: 5px;
 }
@@ -406,7 +406,7 @@ td {
 }
 
 .analysis-link:hover {
-    color: #1A374D;
+    color: #0b3167;
 }
 
 .table-action {
@@ -445,7 +445,7 @@ td {
 
 .section-3-title {
     text-align: center;
-    color: #1A374D;
+    color: #0b3167;
     margin-bottom: 30px;
     font-size: 2em;
 }
@@ -497,7 +497,7 @@ td {
 /* Estilos de Tipografia */
 .slide-tag {
     display: block;
-    color: #63C132;
+    color: #73ca31;
     font-weight: bold;
     font-size: 0.9em;
     margin-bottom: 5px;
@@ -505,7 +505,7 @@ td {
 }
 
 .slide-content h3 {
-    color: #1A374D;
+    color: #0b3167;
     font-size: 1.5em;
     margin-bottom: 10px;
     text-align: left;
@@ -569,7 +569,7 @@ td {
 }
 
 .indicator.active {
-    background-color: #63C132;
+    background-color: #73ca31;
 }
 
 /* --- ESTILO PARA SECTION 4 (TEXTO) --- */
@@ -587,11 +587,11 @@ td {
 
 .section-4-subtitle {
     font-size: 1.8em;
-    color: #1A374D; 
+    color: #0b3167; 
     text-align: center;
     margin: 40px 0 20px 0;
     padding-bottom: 5px;
-    border-bottom: 2px solid #63C132;
+    border-bottom: 2px solid #73ca31;
     display: inline-block;
 }
 
@@ -622,7 +622,7 @@ td {
 }
 
 .check-list li span {
-    color: #63C132; 
+    color: #73ca31; 
     font-weight: bold;
     margin-right: 8px;
 }
@@ -670,7 +670,7 @@ td {
 .highlight-promo-card .rating-score {
     font-size: 1.4em;
     font-weight: bold;
-    color: #63C132;
+    color: #73ca31;
     display: block;
 }
 
@@ -702,7 +702,7 @@ td {
 }
 
 .highlight-promo-card .card-center li span {
-    color: #63C132;
+    color: #73ca31;
     font-weight: bold;
     margin-right: 5px;
 }
@@ -739,7 +739,7 @@ td {
 /* --- ESTILO PARA SECTION 5 (FAQ) --- */
 
 .section-5-bg {
-    background-color: #162C40; 
+    background-color: #0b3167; 
     color: #E8F0FE;
     padding: 60px 20px;
 }
@@ -772,7 +772,7 @@ td {
 
 .faq-question {
     width: 100%;
-    background-color: #1A374D; 
+    background-color: #0b3167; 
     color: #E8F0FE;
     padding: 15px 20px;
     border: none;
@@ -789,7 +789,7 @@ td {
 }
 
 .faq-question:hover {
-    background-color: #244C6A; 
+    background-color: #0b3167; 
 }
 
 .faq-icon {
@@ -806,7 +806,7 @@ td {
     max-height: 0; 
     overflow: hidden;
     transition: max-height 0.4s ease-in-out;
-    background-color: #244C6A; 
+    background-color: #0b3167; 
     color: #c0c7d4;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -821,7 +821,7 @@ td {
 /* --- ESTILO PARA O FOOTER (RODAPÉ) --- */
 
 .main-footer {
-    background-color: #162C40; 
+    background-color: #0b3167; 
     color: #E8F0FE;
     padding: 30px 20px 0; 
 }
@@ -854,12 +854,12 @@ td {
 
 .footer-link-list li a::before {
     content: '→ ';
-    color: #63C132; 
+    color: #73ca31; 
     font-weight: bold;
 }
 
 .footer-link-list a:hover {
-    color: #63C132;
+    color: #73ca31;
     text-decoration: underline;
 }
 
@@ -882,7 +882,7 @@ td {
 }
 
 .footer-disclaimer-text a {
-    color: #63C132;
+    color: #73ca31;
     text-decoration: underline;
     font-weight: bold;
 }
@@ -927,7 +927,7 @@ td {
     right: 20px;
     width: 50px;
     height: 50px;
-    background-color: #63C132; 
+    background-color: #73ca31; 
     border-radius: 50%; 
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     text-align: center;
@@ -938,7 +938,7 @@ td {
 }
 
 .back-to-top-btn:hover {
-    background-color: #50a52b; 
+    background-color: #73ca31; 
 }
 
 .back-to-top-btn .arrow-up {
@@ -947,7 +947,7 @@ td {
     height: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-bottom: 12px solid #E8F0FE; 
+    border-bottom: 12px solid #ffffff; 
     vertical-align: middle;
     margin-top: -5px; 
 }
@@ -976,8 +976,8 @@ td {
         top: 60px; /* Altura da navbar */
         left: 0;
         width: 100%;
-        background-color: #1A374D;
-        border-top: 1px solid #63C132;
+        background-color: #ffffff;
+        border-top: 1px solid #73ca31;
         padding-bottom: 10px;
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
     }
@@ -988,7 +988,7 @@ td {
 
     .nav-links > li {
         margin: 0;
-        border-bottom: 1px solid #244C6A;
+        border-bottom: 1px solid #0b3167;
         padding: 5px 20px;
     }
     
@@ -1003,7 +1003,7 @@ td {
         box-shadow: none;
         border: none;
         padding-left: 20px;
-        background-color: #2f5677;
+        background-color: #0b3167;
     }
 
     .has-submenu:hover > .submenu-level-1,
@@ -1075,7 +1075,7 @@ td {
     
     .highlight-promo-card .card-center {
         border-left: none;
-        border-top: 1px solid #e0e0e0;
+        border-top: 1px solid #000000;
         padding: 15px 0;
         width: 100%;
     }
