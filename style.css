@@ -97,7 +97,7 @@ html {
 .submenu-level-2 {
     display: none; 
     position: absolute;
-    background-color: #0b3167; 
+    background-color: #ffffff; 
     min-width: 220px;
     z-index: 10;
     border: 1px solid #0b3167; 
