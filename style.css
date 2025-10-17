@@ -438,7 +438,7 @@ td {
     color: #8c9cb1;
 }
 
-/* --- SEÇÃO 3: CARROSSEL DE NOTÍCIAS/IMAGENS --- */
+/* --- SEÇÃO 3: CARROSSEL DE NOTÍCIAS/IMAGENS (Desktop) --- */
 .carousel-section {
     background-color: #fff;
     padding: 60px 0;
@@ -452,8 +452,8 @@ td {
 }
 
 .carousel-container {
-    max-width: 1000px; /* Limita a largura máxima do carrossel no desktop */
-    margin: 0 auto; /* Centraliza o carrossel na página */
+    max-width: 2000px; /* Mantido o seu valor atual */
+    margin: 0 auto; 
     position: relative;
     overflow: hidden; 
 }
@@ -461,30 +461,32 @@ td {
 .carousel-track {
     display: flex;
     transition: transform 0.5s ease-in-out;
-    white-space: nowrap; /* Garante que os slides fiquem na linha */
+    white-space: nowrap; /* ESSENCIAL para o carrossel */
 }
 
 .carousel-slide {
     flex-shrink: 0;
     width: 100%;
     
+    /* ADICIONADO PARA GARANTIR QUE O TEXTO QUEBRE NO DESKTOP */
+    white-space: normal; 
+    
     /* ESTILOS DE VISUALIZAÇÃO E CENTRALIZAÇÃO */
     padding: 30px 40px;
     background-color: #f4f7fa;
     border-radius: 8px;
-    margin: 0; /* CRÍTICO: Sem margem horizontal para o JS funcionar */
+    margin: 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     
-    /* FLEXBOX PARA ALINHAR CONTEÚDO DENTRO DO SLIDE */
+    /* FLEXBOX PARA ALINHAR CONTEÚDO */
     display: flex;
-    align-items: center;   /* Centraliza Verticalmente */
-    justify-content: center; /* CRÍTICO: Centraliza Horizontalmente o bloco imagem + texto */
-    gap: 30px; /* Espaçamento entre a imagem e o texto */
+    align-items: center;
+    justify-content: center; 
+    gap: 30px;
 }
 
-/* Tamanhos dos itens no desktop para permitir centralização */
 .carousel-slide img {
-    max-width: 30%; /* Reduzido para 30% para liberar espaço */
+    max-width: 30%; 
     height: auto;
     max-height: 250px; 
     object-fit: cover;
@@ -492,34 +494,41 @@ td {
 }
 
 .slide-content {
-    max-width: 50%; /* Reduzido para 50% para liberar espaço */
+    max-width: 700px; /* Sugestão para manter boa leitura em container grande */
+    width: 50%;
 }
 
-/* Estilos de Tipografia */
+/* Estilos de Tipografia Desktop */
+.slide-tag,
+.slide-content h3,
+.slide-content p {
+    text-align: left; /* Alinhamento à esquerda no desktop */
+}
+
 .slide-tag {
     display: block;
     color: #73ca31;
     font-weight: bold;
     font-size: 0.9em;
     margin-bottom: 5px;
-    text-align: left;
 }
 
 .slide-content h3 {
     color: #0b3167;
     font-size: 1.5em;
     margin-bottom: 10px;
-    text-align: left;
 }
 
 .slide-content p {
     color: #4a6a85;
     font-size: 1em;
     margin-bottom: 15px;
-    text-align: left;
+    word-wrap: break-word;     
+    overflow-wrap: break-word; 
 }
 
-/* Navegação */
+
+/* Navegação e Indicadores (sem alterações importantes) */
 .carousel-button {
     position: absolute;
     top: 50%;
@@ -552,7 +561,6 @@ td {
     right: 10px;
 }
 
-/* Indicadores */
 .carousel-indicators {
     text-align: center;
     padding-top: 20px;
@@ -572,6 +580,7 @@ td {
 .indicator.active {
     background-color: #73ca31;
 }
+
 
 /* --- ESTILO PARA SECTION 4 (TEXTO) --- */
 
@@ -1098,28 +1107,47 @@ td {
         text-align: center;
     }
 
-    .carousel-section {
+/* --- SEÇÃO 3: CARROSSEL DE NOTÍCIAS/IMAGENS --- */
+
+.carousel-section {
         padding: 40px 0;
     }
-    
+
     .carousel-slide {
-        /* Stack the elements vertically on mobile */
-        flex-direction: column;
-        text-align: center;
-        padding: 30px 20px;
+        /* Garante que a imagem e o conteúdo fiquem um abaixo do outro */
+        flex-direction: column; 
+        align-items: center; /* CENTRALIZA TODOS OS FILHOS HORIZONTALMENTE */
+        padding: 30px 20px; /* Reduz o padding horizontal no mobile */
+        /* white-space: normal; (É herdado do .carousel-slide acima, mas bom checar) */
     }
-    
+
     .carousel-slide img {
-        max-width: 80%; /* A imagem ocupa mais espaço no mobile */
-        margin-bottom: 20px; 
+        max-width: 90%; /* Aumenta a imagem para ocupar mais espaço no mobile */
+        margin: 0 auto 20px auto; 
+        /* Limpa regras de largura do desktop */
+        width: auto; 
+        max-height: 200px; /* Pode reduzir um pouco a altura para telas menores */
     }
 
     .slide-content {
-        max-width: 100%; /* O conteúdo ocupa a largura total */
+        max-width: 100%; /* Ocupa a largura total disponível do slide */
+        width: auto; /* Limpa a regra de 50% do desktop */
     }
     
-    .slide-content h3, .slide-content p, .slide-tag {
-        text-align: center; /* Centraliza todo o texto quando em coluna */
+    /* OTIMIZAÇÃO: Centraliza o texto no mobile para melhor visualização */
+    .slide-tag,
+    .slide-content h3, 
+    .slide-content p {
+        text-align: center; 
+    }
+    
+    .slide-content h3 {
+        font-size: 1.3em; /* Reduz um pouco o título para não quebrar tanto */
+    }
+    
+    .slide-content p {
+        /* Ajuste do padding inferior para deixar o texto mais junto */
+        margin-bottom: 10px; 
     }
 
     .carousel-button {
