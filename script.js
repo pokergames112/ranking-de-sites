@@ -7,11 +7,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const navbarContainer = document.querySelector('.navbar-container');
     
     if (menuToggle && navbarContainer) {
-        // Abre e fecha o menu ao clicar no botão hamburguer
+        // Abre e fecha o menu principal ao clicar no botão hamburguer
         menuToggle.addEventListener('click', () => {
             navbarContainer.classList.toggle('open');
             // Impede que o corpo do documento role quando o menu estiver aberto
             document.body.classList.toggle('no-scroll', navbarContainer.classList.contains('open'));
+
+            // Fecha todos os submenus expandidos ao fechar o menu principal
+            if (!navbarContainer.classList.contains('open')) {
+                document.querySelectorAll('.has-submenu.expanded, .has-submenu-level-2.expanded').forEach(li => {
+                    li.classList.remove('expanded');
+                });
+            }
         });
 
         // Adiciona funcionalidade de expansão/recolhimento para submenus no mobile
@@ -19,16 +26,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
         hasSubmenus.forEach(link => {
             link.addEventListener('click', (e) => {
-                // Previne a navegação se estiver em mobile
+                // Checa se está no modo mobile para aplicar a lógica de clique
                 if (window.innerWidth <= 768) {
-                    e.preventDefault();
+                    e.preventDefault(); // Previne a navegação
                     const parentLi = link.parentElement;
-                    const targetMenu = parentLi.querySelector('.submenu-level-1') || parentLi.querySelector('.submenu-level-2');
+                    const isCurrentlyExpanded = parentLi.classList.contains('expanded');
                     
-                    if (targetMenu) {
-                        parentLi.classList.toggle('expanded');
+                    // 1. Identifica o seletor do nível (Para fechar outros do mesmo nível)
+                    const selector = parentLi.matches('.has-submenu') ? '.has-submenu' : '.has-submenu-level-2';
+                    
+                    // 2. Fecha todos os outros submenus ABERTOS do mesmo nível (Efeito Acordeão)
+                    document.querySelectorAll(selector).forEach(li => {
+                        if (li !== parentLi) {
+                            li.classList.remove('expanded');
+                        }
+                    });
+
+                    // 3. Alterna o estado (abre/fecha) do submenu clicado
+                    parentLi.classList.toggle('expanded', !isCurrentlyExpanded);
+
+                    // 4. Lógica extra: Se estiver fechando o submenu de Nível 1, garante que o de Nível 2 também feche
+                    if (parentLi.matches('.has-submenu') && isCurrentlyExpanded) {
+                        const level2 = parentLi.querySelector('.has-submenu-level-2');
+                        if(level2) {
+                            level2.classList.remove('expanded');
+                        }
                     }
                 }
+                // Em desktop, o clique permite a navegação normal.
             });
         });
     }
@@ -38,8 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. FUNCIONALIDADE DO CARROSSEL AUTOMÁTICO (SECTION 3)
     // ----------------------------------------------------------------
     const setupCarousel = () => {
-        const carousel = document.querySelector('.carousel-container'); // O seu HTML usa .carousel-container como pai
-        // ALTERAÇÃO: Use .carousel-container como base, pois ele contém os botões e indicadores.
+        const carousel = document.querySelector('.carousel-container'); 
         if (!carousel) return;
 
         const track = carousel.querySelector('.carousel-track');
@@ -49,13 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentSlide = 0;
         let carouselInterval;
         const autoSlideDelay = 5000; // 5 segundos
-
-        // 1. Configuração inicial (REMOVIDA A LÓGICA DE LARGURA CONFLITANTE)
-        
-        // As linhas abaixo foram removidas pois causavam o conflito:
-        // track.style.width = `${totalSlides * 100}%`;
-        // slides.forEach(slide => { slide.style.width = `${100 / totalSlides}%`; });
-        // O CSS agora garante que cada slide tenha width: 100% e o track use display: flex.
 
         // Cria os indicadores (MANTIDO)
         for (let i = 0; i < totalSlides; i++) {
@@ -81,7 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 targetIndex = 0;
             }
 
-            // A movimentação é de 100% do container para cada slide
             const amountToMove = targetIndex * 100;
             track.style.transform = 'translateX(-' + amountToMove + '%)';
             currentSlide = targetIndex;
@@ -91,9 +107,9 @@ document.addEventListener('DOMContentLoaded', () => {
             indicators[currentSlide].classList.add('active');
         }
 
-        // 3. Navegação manual (SELETORES CORRIGIDOS)
-        const prevButton = carousel.querySelector('.carousel-button.prev'); // CORRIGIDO: usa '.carousel-button.prev'
-        const nextButton = carousel.querySelector('.carousel-button.next'); // CORRIGIDO: usa '.carousel-button.next'
+        // 3. Navegação manual (MANTIDO E CORRETO)
+        const prevButton = carousel.querySelector('.carousel-button.prev'); 
+        const nextButton = carousel.querySelector('.carousel-button.next'); 
 
         if (prevButton) {
             prevButton.addEventListener('click', () => {
@@ -147,10 +163,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
             
             if (currentScroll > lastScrollTop && currentScroll > 60) {
-                // Scroll down: Esconde a navbar
                 navbar.classList.add('hidden');
             } else if (currentScroll < lastScrollTop) {
-                // Scroll up: Mostra a navbar
                 navbar.classList.remove('hidden');
             }
             lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; 
@@ -165,7 +179,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const backToTopBtn = document.getElementById('backToTopBtn');
         if (!backToTopBtn) return;
 
-        // Mostra/Esconde o botão com base na posição de rolagem
         window.addEventListener('scroll', () => {
             if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
                 backToTopBtn.style.display = "block";
@@ -174,10 +187,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Comportamento de clique para rolar para o topo
         backToTopBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            // A rolagem suave está definida no CSS 'html { scroll-behavior: smooth; }'
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     };
@@ -205,7 +216,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Alterna o estado do item clicado
                 if (!isActive) {
                     faqItem.classList.add('active');
-                    // Define a altura máxima baseada no conteúdo da resposta
                     answer.style.maxHeight = answer.scrollHeight + "px";
                 } else {
                     faqItem.classList.remove('active');

@@ -31,7 +31,7 @@ html {
 /* --- ESTRUTURA GLOBAL E NAVBAR INTELIGENTE --- */
 
 .section-container {
-    padding-top: 65px; /* Adiciona padding para compensar a navbar fixa */
+    padding-top: 65px; 
 }
 
 .navbar-header {
@@ -39,16 +39,14 @@ html {
     width: 100%;
     padding: 8px 0; 
     border-bottom: 3px solid #73ca31; 
-    
-    /* REGRAS PARA NAVBAR FIXA E INTELIGENTE */
     position: fixed; 
     top: 0;
     z-index: 999; 
-    transition: top 0.3s; /* Transição suave */
+    transition: top 0.3s;
 }
 
 .navbar-header.hidden {
-    top: -65px; /* Esconde a navbar */
+    top: -65px;
 }
 
 .navbar-container {
@@ -65,6 +63,7 @@ html {
     vertical-align: middle;
 }
 
+/* --- NAVLINKS DESKTOP --- */
 .nav-links {
     display: flex;
     font-size: 16px;
@@ -92,7 +91,7 @@ html {
     margin-left: 5px;
 }
 
-/* Estilo Básico dos Submenus */
+/* --- SUBMENU DESKTOP (Hover) --- */
 .submenu-level-1,
 .submenu-level-2 {
     display: none; 
@@ -978,12 +977,12 @@ td {
 
 @media (max-width: 768px) {
     
-    /* Navbar Mobile */
+/* Navbar Mobile */
     .nav-links {
-        display: none;
+        display: none; /* OCULTA por padrão */
         flex-direction: column;
         position: absolute;
-        top: 60px; /* Altura da navbar */
+        top: 60px;
         left: 0;
         width: 100%;
         background-color: #ffffff;
@@ -993,7 +992,7 @@ td {
     }
 
     .navbar-container.open .nav-links {
-        display: flex;
+        display: flex; /* EXIBE quando a navbar está aberta */
     }
 
     .nav-links > li {
@@ -1001,26 +1000,71 @@ td {
         border-bottom: 1px solid #0b3167;
         padding: 5px 20px;
     }
-    
-    .has-submenu > a::after {
-        float: right;
+
+    .nav-links a {
+        width: 100%; 
     }
+
+    /* Ajuste na seta do submenu de nível 1 */
+    .has-submenu > a::after {
+        content: '\25BC'; /* Mantém o ícone */
+        float: right;
+        transition: transform 0.3s ease; 
+    }
+
+    /* Gira a seta quando o submenu estiver aberto */
+    .has-submenu.expanded > a::after {
+        transform: rotate(180deg);
+    }
+    
+    /* Ajuste na seta do submenu de nível 2 */
+    .has-submenu-level-2 > a::after {
+        content: '\25B6'; /* Mantém o ícone */
+        float: right;
+        transition: transform 0.3s ease; 
+    }
+
+    /* Gira a seta quando o submenu estiver aberto */
+    .has-submenu-level-2.expanded > a::after {
+        transform: rotate(90deg);
+    }
+
+    /* --- REGRAS DO SUBMENU MOBILE (Para JS) --- */
 
     .submenu-level-1,
     .submenu-level-2 {
-        position: static; /* Submenus se expandem verticalmente */
+        position: static; /* Verticalmente */
         width: 100%;
         box-shadow: none;
         border: none;
         padding-left: 20px;
-        background-color: #0b3167;
-    }
-
-    .has-submenu:hover > .submenu-level-1,
-    .has-submenu-level-2:hover > .submenu-level-2 {
-        display: none; /* Desabilita hover no mobile, JS é necessário */
+        background-color: #ffffff;
+        display: none; /* OCULTO POR PADRÃO. O JS vai mudar isso. */
     }
     
+    /* 🟢 EXIBE SUBMENU NÍVEL 1 NO CLIQUE/TOQUE */
+    .has-submenu.expanded > .submenu-level-1 {
+        display: block !important; 
+    }
+
+    /* 🟢 EXIBE SUBMENU NÍVEL 2 NO CLIQUE/TOQUE */
+    .has-submenu-level-2.expanded > .submenu-level-2 {
+        display: block !important; 
+    }
+
+    /* Estilo dos links do submenu no mobile */
+    .submenu-level-1 a,
+    .submenu-level-2 a {
+        color: #0b3167; 
+    }
+
+    /* ANULA O HOVER NO MOBILE */
+    .has-submenu:hover > .submenu-level-1,
+    .has-submenu-level-2:hover > .submenu-level-2 {
+        display: none; 
+    }
+
+    /* Botão Mobile (Garantindo que apareça) */
     .menu-toggle {
         display: block;
     }
