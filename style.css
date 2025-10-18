@@ -932,8 +932,8 @@ td {
 .back-to-top-btn {
     display: none; 
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 50px;
+    right: 50px;
     width: 50px;
     height: 50px;
     background-color: #73ca31; 
@@ -1067,6 +1067,60 @@ td {
     /* Botão Mobile (Garantindo que apareça) */
     .menu-toggle {
         display: block;
+    }
+
+    /* Section 1 Sidebar */
+
+    /* 🟢 REGRAS PARA ALINHAR OS ITENS DA SIDEBAR NO MOBILE 🟢 */
+    
+    /* 1. Faz o contêiner de cada item ser um Flex Container */
+    .section-1-sidebar .sidebar-item {
+        display: flex;
+        /* Alinha os itens na vertical no centro (ícone, label e link) */
+        align-items: center; 
+        /* Adiciona um pequeno espaçamento entre os itens */
+        gap: 5px; 
+        /* Opcional: Adiciona padding horizontal para não grudar na borda */
+        padding: 5px 15px; 
+        /* Opcional: Espaçamento vertical entre os blocos */
+        margin-bottom: 10px; 
+        /* Opcional: Adiciona uma borda para separar visualmente */
+        border: 1px solid #eee; 
+        border-radius: 5px;
+    }
+
+    /* 2. Ajusta o tamanho do ícone */
+    .section-1-sidebar .icon {
+        /* Garante que o ícone ocupe um espaço fixo (por exemplo, 20px) */
+        flex-shrink: 0; 
+        font-size: 1.2em; /* Deixa o ícone em bom tamanho */
+    }
+
+    /* 3. Garante que o label (rótulo) se ajuste */
+    .section-1-sidebar .label {
+        /* Permite que o label ocupe o espaço necessário, mas não cresça infinitamente */
+        flex-grow: 0; 
+        flex-shrink: 1;
+        /* Adicione quebra de linha se o texto for muito longo */
+        white-space: normal; 
+    }
+
+    /* 4. Garante que o valor (link) se ajuste e fique alinhado à direita se possível */
+    .section-1-sidebar .value {
+        /* Permite que o link ocupe o espaço restante */
+        flex-grow: 1; 
+        /* Alinha o texto do link à direita do espaço que ele ocupa */
+        text-align: right; 
+        /* Garante que o link não quebre no meio se a palavra for muito longa,
+           e sim que o texto quebre ou ocupe o espaço disponível */
+        min-width: 0; /* Necessário para funcionar em alguns navegadores */
+    }
+    
+    /* 5. Alinha o disclaimer (+18) */
+    .sidebar-disclaimer {
+        text-align: center; /* Centraliza o texto do disclaimer */
+        margin-top: 15px; 
+        font-size: 0.9em;
     }
     
     /* Section 2 (Tabela) */
@@ -1246,5 +1300,18 @@ td {
         text-align: center;
         border-bottom: none;
         padding-bottom: 0;
+    }
+    .safety-seals {
+        display: flex; /* Transforma o contêiner em um Flex Container */
+        justify-content: center; /* Centraliza as imagens horizontalmente */
+        align-items: center; /* Alinha as imagens verticalmente (se tiverem alturas diferentes) */
+        gap: 15px; /* Adiciona um pequeno espaço entre as imagens (opcional) */
+        margin-top: 10px; /* Adiciona um espaço acima, se precisar */
+        width: 100%; /* Garante que ocupe a largura total se necessário */
+    }
+
+    .safety-seals .seal {
+        max-width: 80px; /* Ajuste este valor conforme o tamanho desejado */
+        height: auto;
     }
 }
