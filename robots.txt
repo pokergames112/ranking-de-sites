@@ -1,0 +1,15 @@
+# Bet Promo - Arquivo de diretrizes para rastreamento
+User-agent: *
+Allow: /
+Disallow: /img/
+Disallow: /scripts/
+Disallow: /style/
+Sitemap: https://joaolucasgithub.github.io/betpromo/sitemap.xml
+
+# Evita indexação de páginas duplicadas ou internas
+Disallow: /404.html
+Disallow: /temp/
+Disallow: /backup/
+
+# Tempo entre requisições dos bots
+Crawl-delay: 10
